@@ -13,26 +13,60 @@ const computerChoice = getComputerChoice();
 //- Add RPS logic to a 'playGame' function that takes playerChoice and computerSelection as params.
 function playGame(playerSelection, computerSelection) {
     if(playerSelection === 'rock' && computerSelection === 'rock') {
-        console.log('Its a tie!');
+        return ('Its a tie!');
     } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-        console.log('You loose! Paper beats Rock!');
+        return ('You loose! Paper beats Rock!');
     } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-        console.log('You win! Rock beats Scissors!');
+        return ('You win! Rock beats Scissors!');
     } else if (playerSelection === 'paper' && computerSelection === 'paper') {
-        console.log('Its a tie!');
+        return ('Its a tie!');
     } else if (playerSelection === 'paper' && computerSelection === 'rock') {
-        console.log('You win! Paper beats Rock!');
+        return ('You win! Paper beats Rock!');
     } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-        console.log('You loose! Scissors beats Paper!');
+        return ('You loose! Scissors beats Paper!');
     } else if (playerSelection === 'scissors' && computerSelection === 'scissors') {
-        console.log('Its a tie!');
+        return ('Its a tie!');
     } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-        console.log('You win! Scissors beats Paper!');
+        return ('You win! Scissors beats Paper!');
     } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-        console.log('You loose! Rock beats Scissors!');
+        return ('You loose! Rock beats Scissors!');
     } else {
-        console.log('Something went wrong..');
+        return ('Something went wrong..');
     }
 }
+
+
 //- Call function and display it in console.
-console.log(playGame(playerChoice, computerChoice));
+// console.log(playGame(playerChoice, computerChoice));
+
+// A function to keep track of score and display each round in console. Best of 5.
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+    let games = 5;
+
+    for (let i = 0; i <= games; i++) {
+        const computerChoice = getComputerChoice();
+        let result = playGame(playerChoice, computerChoice);
+        if(String(result).includes('win')) {
+            playerScore++;
+            console.log(result);
+        } else if (String(result).includes('loose')) {
+            computerScore++;
+            console.log(result);
+        } else {
+            playerScore++;
+            computerScore++;
+            console.log(result);
+        }
+    }
+    if(playerScore > computerScore) {
+        return (`You got the best score of ${playerScore} in a total of ${games} rounds.`);
+    } else if(computerScore > playerScore) {
+        return (`You lost with a score of ${playerScore} in a total of ${games} rounds. The computer got ${computerScore}`);
+    } else {
+        return (`It was a tie! Your score: ${playerScore}. Computer score: ${computerScore}`);
+    }
+}
+
+console.log(game());
